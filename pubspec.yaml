@@ -1,0 +1,10 @@
+name: naive_bayes
+version: 0.0.1
+authors:
+- torta <torta@hloli.net>
+- ttezel https://github.com/ttezel
+- pwlmaciejewski https://github.com/pwlmaciejewski
+description: A Naive-Bayes Classifier for Dart
+homepage: http://github.com/torta/naive_bayes.dart
+environment:
+  sdk: ">=2.0.0-dev.68.0 <3.0.0"
