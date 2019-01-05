@@ -65,29 +65,18 @@ class NaiveBayes {
   }
 
   String categorize(List<String> tokens) {
-    String chosenCategory;
-    var maxProbability = double.negativeInfinity;
     var probabilityList = probabilities(tokens);
-    for (Map categoryProbability in probabilityList) {
-      if (categoryProbability['value'] > maxProbability) {
-        maxProbability = categoryProbability['value'];
-        chosenCategory = categoryProbability['category'];
-      }
-    }
-    return chosenCategory;
+    probabilityList.sort((a, b) => b['value'].compareTo(a['value']));
+    return probabilityList.isEmpty ? null : probabilityList.first['category'];
   }
 
   List probabilities(List<String> tokens) {
     var ret = [];
     var frequencyMap = frequencyTable(tokens);
     for (String category in _categories.keys) {
-      var categoryProbability = _docCount[category] / _totalDocuments;
-      var logProbability = log(categoryProbability);
-      for (String token in frequencyMap.keys) {
-        var frequencyInText = frequencyMap[token];
-        logProbability +=
-            frequencyInText * log(tokenProbability(token, category));
-      }
+      var logProbability = log(_docCount[category] / _totalDocuments);
+      frequencyMap.keys.forEach((token) => logProbability +=
+          frequencyMap[token] * log(tokenProbability(token, category)));
       ret.add({'category': category, 'value': logProbability});
     }
     return ret;

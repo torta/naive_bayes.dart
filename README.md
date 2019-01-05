@@ -19,14 +19,21 @@ You can use this for categorizing any text content into any arbitrary set of **c
 ```javascript
 var classifier = NaiveBayes();
 
+classifier
 // teach it positive phrases
-
-classifier.learn(['amazing', 'awesome', 'movie', 'Yeah', 'Oh', 'boy'], 'positive');
-classifier.learn(['Sweet', 'this', 'is', 'incredibly', 'amazing', 'perfect', 'great'], 'positive');
-
+  ..learn(
+    ['amazing', 'awesome', 'movie', 'Yeah', 'Oh', 'boy'],
+    'positive',
+  )
+  ..learn(
+    ['Sweet', 'this', 'is', 'incredibly', 'amazing', 'perfect', 'great'],
+    'positive',
+  )
 // teach it a negative phrase
-
-classifier.learn(['terrible', 'shitty', 'thing', 'Damn', 'Sucks'], 'negative');
+  ..learn(
+    ['terrible', 'shitty', 'thing', 'Damn', 'Sucks'],
+    'negative',
+  );
 
 // now ask it to categorize a document it has never seen before
 
@@ -46,7 +53,7 @@ var revivedClassifier = NaiveBayes.fromJson(stateJson)
 
 ## References
 
-Naive-Bayes Classifier for node.js 
+Naive-Bayes Classifier for node.js
 
 [https://github.com/ttezel/bayes](https://github.com/ttezel/bayes)
 
